@@ -1,0 +1,59 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add serverlees-offline
+
+PATH: 
+  C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Docker\Docker\Resources\bin;C:\Program Files (x86)\Python\;C:\Program Files (x86)\Python\Scripts;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Maven\apache-maven-3.3.9\bin;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\MySQL\MySQL Utilities 1.6\;C:\Program Files\Winginx\php56;C:\Program Files\PostgreSQL\9.6\bin\;C:\Program Files\MySql\MySQL Server 5.7\bin\;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\MongoDB\Server\3.4\bin;C:\Program Files\PostgreSQL\9.6\lib;C:\Users\Unknown\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\CMake\bin;C:\Projects\emsdk;C:\msys64\mingw32\bin;C:\Qt\5.11.1\mingw53_32\bin;C:\Program Files\dotnet\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Microsoft VS Code\bin;C:\Go\bin;C:\Program Files\Git\cmd;C:\ffmpeg\bin;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\Amazon\AWSCLI\bin\;C:\lua\bin;C:\Ruby24-x64\bin;C:\Program Files (x86)\Python\Scripts\;C:\Program Files (x86)\Python\;C:\Users\Unknown\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\curl\src;C:\Users\Unknown\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\7-Zip;C:\Users\Unknown\go;C:\Projects\go-workspace;\bin;C:\ffmpeg\bin;;C:\Program Files\JetBrains\GoLand 2019.1\bin;;C:\Users\Unknown\AppData\Roaming\npm;C:\Users\Unknown\AppData\Local\Yarn\bin;C:\Users\Unknown\AppData\Local\Programs\Fiddler;C:\Program Files\JetBrains\WebStorm 2020.1.1\bin;
+
+Yarn version: 
+  1.17.3
+
+Node version: 
+  12.8.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/serverlees-offline: Not found
+      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:65939:18)
+      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:140464:22)
+      at Request.emit (events.js:203:13)
+      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141436:10)
+      at Request.emit (events.js:203:13)
+      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141358:12)
+      at Object.onceWrapper (events.js:291:20)
+      at IncomingMessage.emit (events.js:208:15)
+      at endReadableNT (_stream_readable.js:1168:12)
+      at processTicksAndRejections (internal/process/task_queues.js:77:11)
+
+npm manifest: 
+  {
+    "name": "webgl-experiments-backend",
+    "version": "1.0.0",
+    "description": "Serverless webpack example using Typescript",
+    "main": "handler.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+      "source-map-support": "^0.5.10"
+    },
+    "devDependencies": {
+      "@types/aws-lambda": "^8.10.17",
+      "@types/node": "^10.12.18",
+      "fork-ts-checker-webpack-plugin": "^3.0.1",
+      "serverless-webpack": "^5.2.0",
+      "ts-loader": "^5.3.3",
+      "typescript": "^3.2.4",
+      "webpack": "^4.29.0",
+      "webpack-node-externals": "^1.7.2"
+    },
+    "author": "The serverless webpack authors (https://github.com/elastic-coders/serverless-webpack)",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
