@@ -11,17 +11,56 @@ tags:
 - name: developers
   description: Operation available to regular developers
 paths:
-  /user:
+  /auth/register:
+    post:
+      summary: Register user
+      description: Register new user and return JWT
+      operationId: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/body'
+        required: true
+      responses:
+        "200":
+          description: Reguster success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+  /auth/login:
+    post:
+      summary: Login user
+      description: Returns JWT
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/body_1'
+        required: true
+      responses:
+        "200":
+          description: Login success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "400":
+          description: Invalid username/password supplied
+  /user/{id}:
     get:
-      tags:
-      - developers
+      summary: Find user by ID
+      description: Returns a single user
+      operationId: getUserById
       parameters:
       - name: id
-        in: query
+        in: path
         description: user id
         required: true
-        style: form
-        explode: true
+        style: simple
+        explode: false
         schema:
           type: string
       responses:
@@ -48,6 +87,25 @@ components:
         name:
           type: string
           example: Johnny Depps
+    body:
+      type: object
+      properties:
+        login:
+          type: string
+        password:
+          type: string
+    inline_response_200:
+      type: object
+      properties:
+        token:
+          type: string
+    body_1:
+      type: object
+      properties:
+        login:
+          type: string
+        password:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http
