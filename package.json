@@ -4,7 +4,8 @@
   "description": "Serverless webpack example using Typescript",
   "main": "handler.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "offline": "sls offline --stage local --useChildProcesses",
+    "generate-types": "dtsgen --out @types/api.d.ts swagger/swagger.yaml"
   },
   "dependencies": {
     "pg": "^8.2.1",
@@ -13,6 +14,7 @@
   "devDependencies": {
     "@types/aws-lambda": "^8.10.17",
     "@types/node": "^10.12.18",
+    "dtsgenerator": "^3.0.1",
     "fork-ts-checker-webpack-plugin": "^3.0.1",
     "serverless": "^1.72.0",
     "serverless-offline": "^6.3.1",

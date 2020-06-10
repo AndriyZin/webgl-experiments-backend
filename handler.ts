@@ -62,8 +62,7 @@ const client = new Client({
 
 client.connect()
 
-export const hello: APIGatewayProxyHandler = async (_event, _context) => {
-
+export const getUserById: APIGatewayProxyHandler = async (_event, _context) => {
 
     await init(client)
 
