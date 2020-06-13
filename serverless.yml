@@ -79,7 +79,7 @@ resources:
 
 functions:
   getUserById:
-    handler: handler.getUserById
+    handler: handler._getUserById
     events:
       - http:
           method: get

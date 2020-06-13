@@ -1,10 +1,6 @@
-import { APIGatewayProxyHandler } from 'aws-lambda';
 import 'source-map-support/register';
 import { getClient } from './helpers/db';
-import { APIGatewayProxyResult } from 'aws-lambda/trigger/api-gateway-proxy';
-import { getUser } from './endpoints/user/getUserById';
-import { request } from './helpers/request';
-import { ApiResponse } from './@types/ApiResponse';
+import { getUserById } from './endpoints/user/getUserById';
 
 console.log('lambda Init');
 
@@ -18,18 +14,5 @@ const dbClient = getClient({
 
 dbClient.connect()
 
+export const _getUserById = (_event, _context) => getUserById(_event, _context, dbClient);
 
-type GetUserByIdResponses =
-    ApiResponse<200, Paths.GetUserById.Responses.$200>
-    | ApiResponse<404, Paths.GetUserById.Responses.$404>;
-
-export const getUserById: APIGatewayProxyHandler = async (_event, _context): Promise<APIGatewayProxyResult> => {
-    const params: Paths.GetUserById.PathParameters = _event.pathParameters as any;
-
-    return request<Paths.GetUserById.PathParameters, GetUserByIdResponses>(params, async (params) => {
-        return {
-            statusCode: 200,
-            data: await getUser(dbClient, params.id)
-        }
-    });
-}

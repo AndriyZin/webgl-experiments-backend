@@ -1,4 +1,7 @@
 import User = Components.Schemas.User;
+import { APIGatewayProxyResult } from 'aws-lambda/trigger/api-gateway-proxy';
+import { request } from '../../helpers/request';
+import { ApiResponse } from '../../@types/ApiResponse';
 
 export async function getUser(client, uuid): Promise<User> {
     const user: any = {};
@@ -25,3 +28,19 @@ export async function getUser(client, uuid): Promise<User> {
 }
 
 
+
+type GetUserByIdResponses =
+    ApiResponse<200, Paths.GetUserById.Responses.$200>
+    | ApiResponse<404, Paths.GetUserById.Responses.$404>;
+
+export async function getUserById(_event, _context, dbClient): Promise<APIGatewayProxyResult> {
+    const params: Paths.GetUserById.PathParameters = _event.pathParameters as any;
+
+    return request<Paths.GetUserById.PathParameters, GetUserByIdResponses>(params, async (params, auth) => {
+        console.log(auth);
+        return {
+            statusCode: 200,
+            data: await getUser(dbClient, params.id)
+        }
+    });
+}
