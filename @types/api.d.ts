@@ -35,6 +35,8 @@ declare namespace Paths {
         }
         namespace Responses {
             export type $200 = Components.Schemas.User;
+            export interface $404 {
+            }
         }
     }
     namespace Login {

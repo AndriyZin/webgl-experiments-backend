@@ -78,10 +78,10 @@ resources:
     PostgreSqlRDSInstance: ${file(./resource/PostgreSqlRDSInstance.yml)}
 
 functions:
-  hello:
-    handler: handler.hello
+  getUserById:
+    handler: handler.getUserById
     events:
       - http:
           method: get
-          path: hello
+          path: user/{id}
           cors: true
