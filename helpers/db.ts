@@ -1,30 +1,47 @@
-const { Client } = require('pg');
+import { DataTypes, Sequelize } from 'sequelize';
+
+export class DB {
+    client: Sequelize;
+    isSynced: boolean = false;
+    syncPromise$: Promise<Sequelize>;
 
 
-export function getClient(config) {
-    return new Client(config)
+    constructor(config) {
+        const { host, port, database, user, password } = config;
+        this.client = new Sequelize(database, user, password, {
+            host,
+            port,
+            dialect: 'postgres',
+        });
+    }
+
+    getInstance(): Promise<Sequelize> {
+        if (this.isSynced) return Promise.resolve(this.client);
+        if (this.syncPromise$) return this.syncPromise$;
+        return init(this.client).then(db => {
+            this.isSynced = true;
+            return db;
+        });
+    };
 }
 
-export async function init(client) {
-    await client.query(`
-    CREATE TABLE IF NOT EXISTS users
-    (
-        id serial not null PRIMARY KEY, 
-        created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        uuid char(36) not null, 
-        name varchar(100) not null
-    );  
-    `)
 
-    await client.query(`
-    CREATE TABLE IF NOT EXISTS posts
-    (
-        id serial not null PRIMARY KEY, 
-        created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        uuid char(36) not null, 
-        text varchar(100) not null, 
-        user_id INT not null
-    );  
-    `)
+export function init(sequelize: Sequelize) {
+    sequelize.define(
+        'User',
+        {
+            id: {
+                type: DataTypes.INTEGER,
+                unique: true,
+                primaryKey: true
+            },
+            name: {
+                type: DataTypes.STRING,
+            },
+        },
+        {
+            tableName: 'users'
+        },
+    );
+    return sequelize.sync();
 }
-
