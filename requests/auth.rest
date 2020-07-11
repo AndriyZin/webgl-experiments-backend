@@ -1,0 +1,9 @@
+POST http://localhost:3000/local/login
+
+{ "login" : "dron", "password": "dron" }
+
+###
+
+POST http://localhost:3000/local/register
+
+{ "login" : "dron", "password": "password" }

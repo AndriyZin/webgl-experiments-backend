@@ -7,6 +7,6 @@ export async function request<T, K>(params: T, resolver: (params: T, auth?: any)
 
     return {
         statusCode,
-        body: JSON.stringify(data, null, 2),
+        body: data && JSON.stringify(data, null, 2),
     };
 }

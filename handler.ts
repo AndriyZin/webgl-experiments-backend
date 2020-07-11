@@ -1,6 +1,11 @@
 import 'source-map-support/register';
-import { getUserById } from './endpoints/user/getUserById';
 import { DB } from './helpers/db';
+import { getUserById } from './endpoints/user/getUserById';
+import { login } from './endpoints/auth/login';
+import { register } from './endpoints/auth/register';
+import { APIGatewayProxyHandler } from 'aws-lambda';
+import { withPermissions } from './helpers/withPermissions';
+import { genericError } from './helpers/error';
 
 console.log('lambda Init');
 
@@ -13,4 +18,14 @@ const db = new DB({
 });
 
 
-export const _getUserById = (_event, _context) => getUserById(_event, _context, db);
+
+
+export const _register = (_event, _context) => register(_event, _context, db);
+
+
+export const _login = (_event, _context) => login(_event, _context, db);
+
+
+export const _getUserById: APIGatewayProxyHandler = (_event, _context) => withPermissions(_event, _context, db, ["USER"])
+    .then(() => getUserById(_event, _context, db))
+    .catch(genericError)

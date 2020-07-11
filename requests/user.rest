@@ -1,0 +1,2 @@
+http://localhost:3000/local/user/16
+authorization: Bearer {{token}}

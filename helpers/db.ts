@@ -12,16 +12,18 @@ export class DB {
             host,
             port,
             dialect: 'postgres',
+            logging: false
         });
     }
 
     getInstance(): Promise<Sequelize> {
         if (this.isSynced) return Promise.resolve(this.client);
         if (this.syncPromise$) return this.syncPromise$;
-        return init(this.client).then(db => {
+        this.syncPromise$ = init(this.client).then(db => {
             this.isSynced = true;
             return db;
         });
+        return this.syncPromise$;
     };
 }
 
@@ -30,10 +32,17 @@ export function init(sequelize: Sequelize) {
     sequelize.define(
         'User',
         {
-            id: {
-                type: DataTypes.INTEGER,
+            login: {
+                type: DataTypes.STRING,
                 unique: true,
-                primaryKey: true
+                allowNull: false
+            },
+            permissions: {
+                type: DataTypes.JSON,
+                defaultValue: {}
+            },
+            password: {
+                type: DataTypes.STRING
             },
             name: {
                 type: DataTypes.STRING,
@@ -43,5 +52,5 @@ export function init(sequelize: Sequelize) {
             tableName: 'users'
         },
     );
-    return sequelize.sync();
+    return sequelize.sync({ alter: true });
 }
